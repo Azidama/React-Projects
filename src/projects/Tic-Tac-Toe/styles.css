@@ -1,0 +1,58 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+  font-family: Tahoma;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  height: 400px;
+  width: 300px;
+  justify-items: center;
+  border-radius: 5px;
+}
+.play-area {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+}
+.square {
+  border-radius: 5px;
+  height: 4rem;
+  width: 4rem;
+  border: 1px solid;
+  font-size: 1.5rem;
+  background-color: white;
+}
+.btn:square {
+    box-shadow:
+    0 0 10px #ff00ee,
+    0 0 20px #aa0000;
+}
+#reset {
+  width: fit-content;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+#reset, square {
+  background-color: white;
+  border: 1px solid;
+}
+h2 {
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin: 0;
+  text-align: center;
+}
+#reset, h2 {
+  margin-top: 0.5rem;
+}
