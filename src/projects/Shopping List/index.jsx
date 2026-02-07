@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import "./styles.css"
 
 const items = [
