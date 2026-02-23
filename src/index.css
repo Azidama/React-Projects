@@ -5,9 +5,29 @@
     @apply font-sans;
   }
 
-  body {
-    @apply grid place-items-center min-w-[320px] min-h-screen relative m-0 bg-background text-foreground;
+  html,
+  body,
+  #root {
+    @apply w-full min-h-full;
   }
+
+  html body {
+    @apply relative m-0 block min-h-screen min-w-[320px] w-full overflow-x-hidden overflow-y-auto bg-background text-foreground;
+  }
+
+  #root {
+    @apply mx-auto w-full min-h-screen;
+  }
+}
+
+/* Force a stable app layout even when project CSS files style `body` globally. */
+html body {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  display: block !important;
 }
 
 /* cool Bun background animation 😎 */
