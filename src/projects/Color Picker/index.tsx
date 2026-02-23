@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 
 export const ColorPicker = () => {
-  const [pickColor, setPickColor] = useState("#ffffff");
-  const handleColorChange = (e) => {
+  const [pickColor, setPickColor] = useState<string>("#ffffff");
+  const handleColorChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPickColor(e.target.value);
   };
 

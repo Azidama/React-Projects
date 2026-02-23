@@ -1,4 +1,10 @@
-export const MoodBoardItem = ({color, image, description}) => {
+type MoodBoardItemProps = {
+  color: string;
+  image: string;
+  description: string;
+};
+
+export const MoodBoardItem = ({ color, image, description }: MoodBoardItemProps) => {
   return (
     <div className="rounded-2xl border border-[#2f3f85] bg-[#0f1843] p-3">
       <div className="rounded-xl p-3" style={{ backgroundColor: color }}>
@@ -11,7 +17,7 @@ export const MoodBoardItem = ({color, image, description}) => {
 
 export const MoodBoard = () => {
   const bgColor = "#f9b86b";
-  const objects = [
+  const objects: MoodBoardItemProps[] = [
     {
       image: "https://cdn.freecodecamp.org/curriculum/labs/pathway.jpg",
       color: bgColor,
