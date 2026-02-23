@@ -1,21 +1,30 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
+
+type SubmittedData = {
+  name: string;
+  email: string;
+  attendees: number;
+  preferences: string;
+  guests: boolean;
+};
 
 export function RSVPEventForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [attendees, setAttendees] = useState(1);
-  const [preferences, setPreferences] = useState("");
-  const [guests, setGuests] = useState(false);
-  const [submittedData, setSubmittedData]= useState(null);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [attendees, setAttendees] = useState<number>(1);
+  const [preferences, setPreferences] = useState<string>("");
+  const [guests, setGuests] = useState<boolean>(false);
+  const [submittedData, setSubmittedData] = useState<SubmittedData | null>(null);
   
-  const handleSubmit =(e)=>{
-    setSubmittedData({ name, email, attendees, preferences, guests });
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmittedData({ name, email, attendees, preferences, guests });
   };
 
-  const handleAttendees = (e) => {
-    if (e.target.value < 1) return;
-    setAttendees(e.target.value);
+  const handleAttendees = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    if (value < 1 || Number.isNaN(value)) return;
+    setAttendees(value);
   };
 
   return (

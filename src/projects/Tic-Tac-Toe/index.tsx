@@ -1,15 +1,17 @@
 import { RotateCcw } from "lucide-react";
 import { useState } from "react";
 
-export function TicTacToe() {
-  const turns = { x: "X", o: "O" };
-  const initialState = new Array(9).fill("");
-  const [playArea, setPlayArea] = useState(initialState);
-  const [nextTurn, setNextTurn] = useState(turns.x);
-  const [winner, setWinner] = useState("");
-  const [isDraw, setIsDraw] = useState(false);
+type Mark = "" | "X" | "O";
 
-  const wins = [
+export function TicTacToe() {
+  const turns = { x: "X", o: "O" } as const;
+  const initialState: Mark[] = new Array(9).fill("");
+  const [playArea, setPlayArea] = useState<Mark[]>(initialState);
+  const [nextTurn, setNextTurn] = useState<Mark>(turns.x);
+  const [winner, setWinner] = useState<Mark>("");
+  const [isDraw, setIsDraw] = useState<boolean>(false);
+
+  const wins: Array<[number, number, number]> = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -20,9 +22,10 @@ export function TicTacToe() {
     [2, 4, 6],
   ];
 
-  const checkWin = board => wins.some(([a, b, c]) => board[a] && board[a] === board[b] && board[a] === board[c]);
+  const checkWin = (board: Mark[]) =>
+    wins.some(([a, b, c]) => board[a] !== "" && board[a] === board[b] && board[a] === board[c]);
 
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     if (playArea[index] !== "" || winner || isDraw) return;
 
     const current = nextTurn;
@@ -69,7 +72,7 @@ export function TicTacToe() {
             <button
               className="group m-0 aspect-square w-full p-0 rounded-2xl border border-[#2f3f85] bg-[#0f1843] text-4xl font-semibold leading-none text-[#ecf0ff] shadow-[0_8px_20px_rgba(0,0,0,0.32)] transition-all duration-200 hover:border-[#ff329d88] hover:bg-[#16215a] disabled:cursor-not-allowed disabled:opacity-90"
               onClick={() => handleClick(index)}
-              disabled={winner || isDraw || square !== ""}
+              disabled={Boolean(winner) || isDraw || square !== ""}
               key={index}
             >
               <span className={square === "X" ? "text-[#ff5ab0]" : "text-[#4de8cb]"}>{square || "·"}</span>

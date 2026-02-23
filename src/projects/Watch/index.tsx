@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 
 export const Watch = () => {
-  const [hours, setHours] = useState("00");
-  const [minutes, setMinutes] = useState("00");
+  const [hours, setHours] = useState<string>("00");
+  const [minutes, setMinutes] = useState<string>("00");
   
-  const incrementor = (n) => {
+  const incrementor = (n: number): string => {
     if (n < 9) {
       n = n + 1;
       return `0${String(n)}`;
@@ -13,7 +13,7 @@ export const Watch = () => {
     return String(n);
   };
 
-  const decrementor = (n) => {
+  const decrementor = (n: number): string => {
     if (n < 9) {
       n = n - 1;
       return `0${String(n)}`;
@@ -22,7 +22,11 @@ export const Watch = () => {
     return String(n);
   };
   
-  const getNumber = (num, crememtor, setter) => {
+  const getNumber = (
+    num: string,
+    crememtor: (n: number) => string,
+    setter: Dispatch<SetStateAction<string>>
+  ) => {
     const intNum = Number(num);
     setter(crememtor(intNum));
   };

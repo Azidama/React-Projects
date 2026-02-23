@@ -6,22 +6,24 @@ export function CurrencyConverter() {
     EUR: 0.92,
     GBP: 0.78,
     JPY: 156.7,
-  };
-  const currencies = Object.keys(exchangeRates);
-  const [startCurrency, setStartCurrency] = useState(currencies[0]);
-  const [targetCurrency, setTargetCurrency] = useState(currencies[0]);
-  const [convertFrom, setConvertFrom] = useState(1);
+  } as const;
+  type CurrencyCode = keyof typeof exchangeRates;
+  const currencies = Object.keys(exchangeRates) as CurrencyCode[];
+  const defaultCurrency: CurrencyCode = "USD";
+  const [startCurrency, setStartCurrency] = useState<CurrencyCode>(currencies[0] ?? defaultCurrency);
+  const [targetCurrency, setTargetCurrency] = useState<CurrencyCode>(currencies[0] ?? defaultCurrency);
+  const [convertFrom, setConvertFrom] = useState<number>(1);
 
   const converted = useMemo(() => {
     const from = exchangeRates[startCurrency];
     const amount = Number(convertFrom) || 0;
-    const rateList = {};
+    const rateList = {} as Record<CurrencyCode, string>;
 
-    for (const curr in exchangeRates) {
+    for (const curr of currencies) {
       rateList[curr] = ((exchangeRates[curr] / from) * amount).toFixed(2);
     }
     return rateList;
-  }, [startCurrency, convertFrom]);
+  }, [startCurrency, convertFrom, currencies]);
 
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden bg-[#060816] px-4 py-12 text-[#c3c9ff] sm:px-6">
@@ -45,7 +47,7 @@ export function CurrencyConverter() {
             <input
               type="number"
               value={convertFrom}
-              onChange={(e) => setConvertFrom(e.target.value)}
+              onChange={(e) => setConvertFrom(Number(e.target.value) || 0)}
               className="h-11 rounded-xl border border-[#3b4f9f] bg-[#121d50] px-3 text-[#ecf0ff] outline-none focus:border-[#ff5ab0]"
             />
           </label>
@@ -54,7 +56,7 @@ export function CurrencyConverter() {
             Convert From
             <select
               value={startCurrency}
-              onChange={(prev) => setStartCurrency(prev.target.value)}
+              onChange={(prev) => setStartCurrency(prev.target.value as CurrencyCode)}
               className="h-11 rounded-xl border border-[#3b4f9f] bg-[#121d50] px-3 text-[#ecf0ff] outline-none focus:border-[#ff5ab0]"
             >
               {currencies.map((curr) => (
@@ -67,7 +69,7 @@ export function CurrencyConverter() {
             Convert To
             <select
               value={targetCurrency}
-              onChange={(e) => setTargetCurrency(e.target.value)}
+              onChange={(e) => setTargetCurrency(e.target.value as CurrencyCode)}
               className="h-11 rounded-xl border border-[#3b4f9f] bg-[#121d50] px-3 text-[#ecf0ff] outline-none focus:border-[#ff5ab0]"
             >
               {currencies.map((curr) => (

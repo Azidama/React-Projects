@@ -13,11 +13,11 @@ const items = [
   "Dish Soap",
 ];
 
-let prevToggleItem = null;
+let prevToggleItem: ((item: string) => void) | null = null;
 
 export const ShoppingList = () => {
-  const [query, setQuery] = useState("");
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [query, setQuery] = useState<string>("");
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const filteredItems = useMemo(() => {
     console.log("Filtering items...");
@@ -26,7 +26,7 @@ export const ShoppingList = () => {
     );
   }, [query]);
 
-  const toggleItem = useCallback((item) => {
+  const toggleItem = useCallback((item: string) => {
     setSelectedItems((prev) =>
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );

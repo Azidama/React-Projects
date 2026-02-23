@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 export const OTPGenerator = () => {
-  const [otp, setOtp] = useState(0);
-  const [timer, setTimer] = useState(0);
+  const [otp, setOtp] = useState<number>(0);
+  const [timer, setTimer] = useState<number>(0);
   const hasTime = timer > 0;
   const otpGenerated = otp > 0;
 

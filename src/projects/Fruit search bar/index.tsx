@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 export function FruitSearchBar() {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState<string>("");
+  const [results, setResults] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
@@ -20,7 +20,7 @@ export function FruitSearchBar() {
       try {
         setLoading(true);
         const response = await fetch(`https://fruit-search.freecodecamp.rocks/api/fruits?q=${query}`);
-        const data = await response.json();
+        const data = (await response.json()) as Array<{ name: string }>;
         setResults(data.map(fruit => fruit.name));
       } catch (error) {
         console.error("Error fetching data:", error);
