@@ -10,6 +10,7 @@ import { createRoot } from "react-dom/client";
 import { App } from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MiniProjectLayout } from "@/layouts/MiniProjectLayout";
+import { applyTheme, getStoredTheme } from "@/lib/theme";
 
 // Mini Projects
 import { ColorPicker } from "@/projects/Color Picker/index";
@@ -22,6 +23,8 @@ import { ShoppingList } from "@/projects/Shopping List/index";
 import { TicTacToe } from "@/projects/Tic-Tac-Toe/index";
 import { Watch } from "@/projects/Watch/index";
 import { ProjectsIndex } from "@/projects";
+
+applyTheme(getStoredTheme());
 
 const elem = document.getElementById("root")!;
 const app = (
