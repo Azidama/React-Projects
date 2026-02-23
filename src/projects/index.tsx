@@ -105,7 +105,7 @@ export const ProjectsIndex = () => {
                 <p className="inline-flex rounded-full border border-[#35d4ba66] bg-[#35d4ba22] px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-[#4de8cb]">
                   React Mini Projects
                 </p>
-                <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#f4f7ff] drop-shadow-[0_0_18px_rgba(148,163,255,0.18)] sm:text-5xl">
+                <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#ffffff] drop-shadow-[0_0_22px_rgba(148,163,255,0.28)] sm:text-5xl">
                   Portfolio Playground
                 </h1>
                 <p className="mt-3 max-w-3xl text-base text-[#99a4e6]">
